@@ -31,7 +31,7 @@ This prompt was written by Claude in the session from my second prompt and then 
 
 ### 2.1 My prompt (executed)
 
-The full text is in `06_prompt_log.md`, entry 5 ("Mission: Transform Habit Ledger into a Standout Fintech Product"). It asked for:
+The full text is in `06_prompt_log.md`, entry 4 ("Mission: Transform Habit Ledger into a Standout Fintech Product"). It asked for:
 - an audit of the existing app;
 - modules A–I (overview, habit intelligence, trade explorer, evidence inspector, guardrail center, month-over-month tracking, data import, scenario lab, methodology);
 - engineering requirements;
