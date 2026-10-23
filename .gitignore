@@ -1,0 +1,22 @@
+# Dependencies and build output
+node_modules/
+app/dist/
+
+# Hosting and local tooling
+.vercel/
+app/.vercel/
+.claude/
+
+# Secrets and environment files (none are used; ignored defensively)
+.env
+.env.*
+*.pem
+*.key
+
+# Logs and OS / sync clutter
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*

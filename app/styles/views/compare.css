@@ -1,0 +1,102 @@
+/* compare view: layout specifics only; shared components live in components.css. */
+
+/* Long import names (one unbroken string) must wrap instead of widening the page on phones. */
+.cmp .eyebrow, .cmp .empty-body { overflow-wrap: anywhere; }
+
+/* Period pickers: From · Swap · To on one row, meta lines underneath; stacked on phones. */
+.cmp-pickers {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-areas: "from swap to" "fmeta . tmeta";
+  gap: var(--sp-1) var(--sp-3);
+  align-items: end;
+}
+.cmp-from { grid-area: from; min-width: 0; }
+.cmp-to { grid-area: to; min-width: 0; }
+.cmp-swap { grid-area: swap; }
+.cmp-from-meta { grid-area: fmeta; min-width: 0; }
+.cmp-to-meta { grid-area: tmeta; min-width: 0; }
+.cmp-pickers select { width: 100%; }
+.cmp-meta { margin: 0; }
+.cmp-thin { color: var(--warn); font-weight: 600; }
+
+/* Section rhythm */
+.cmp > .cmp-section { margin-top: var(--sp-6); }
+.cmp-section-head { margin-bottom: var(--sp-3); }
+.cmp .cmp-section-title { margin: 0; }
+.cmp-section-sub { margin: var(--sp-1) 0 0; max-width: 75ch; }
+.cmp-group-empty { margin: 0; max-width: 75ch; }
+.cmp-list { display: grid; gap: var(--sp-4); }
+
+/* Summary */
+.cmp-counts { margin-bottom: var(--sp-3); }
+.cmp-counts .small { margin-left: var(--sp-1); }
+.cmp-disclaimer { color: var(--text-2); max-width: 75ch; }
+.cmp-rules summary { cursor: pointer; font-weight: 600; color: var(--text); }
+.cmp-rules ul { margin: var(--sp-2) 0 0; padding-left: var(--sp-5); display: grid; gap: var(--sp-1); }
+.cmp-rules .cmp-pvals { margin-top: var(--sp-1); }
+
+/* Behaviour card: figures beside the chart; chart drops below on narrow screens. */
+.cmp-tags { margin-bottom: var(--sp-4); }
+.cmp-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--sp-5);
+  align-items: center;
+}
+.cmp-figs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-4);
+  margin: 0;
+}
+.cmp-fig { min-width: 0; }
+.cmp-fig dd { margin: 0; }
+.cmp-fig .stat-value { margin-top: var(--sp-1); }
+.cmp-fig-change { padding-left: var(--sp-4); border-left: 1px solid var(--border); }
+.cmp-fig .cmp-few { margin-top: var(--sp-2); }
+/* "−21.7 percentage points": the unit is spelled out, smaller than the number. */
+.cmp-unit { display: block; margin-top: 2px; font-size: var(--fs-sm); font-weight: 500; line-height: 1.3; letter-spacing: 0; color: var(--text-2); }
+.cmp-chart { margin: 0; min-width: 0; }
+.cmp-chart figcaption { margin-top: var(--sp-1); }
+
+.cmp-notes { margin-top: var(--sp-4); padding-top: var(--sp-3); border-top: 1px solid var(--border); }
+.cmp-notes p { max-width: 80ch; }
+.cmp-notes p:last-child { margin-bottom: 0; }
+.cmp-cost-vals { white-space: nowrap; }
+
+/* Not-applicable list */
+.cmp-na { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); font-size: var(--fs-sm); }
+
+/* Guardrail compliance rows: rule text beside its two-period figures; stacked on narrow screens. */
+.cmp-guards { list-style: none; margin: 0; padding: 0; }
+.cmp-guard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: var(--sp-5);
+  align-items: start;
+  padding: var(--sp-4) 0;
+  border-top: 1px solid var(--border);
+}
+.cmp-guard:first-child { border-top: 0; padding-top: 0; }
+.cmp-guard-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-2); }
+.cmp-guard-title { font-size: var(--fs-md); }
+.cmp-guard-rule p { margin-bottom: var(--sp-1); }
+.cmp-guard-figs .stat-value { font-size: var(--fs-xl); }
+.cmp-guard-figs .cmp-phase { margin-top: var(--sp-1); }
+.cmp-whatif { display: block; margin-top: var(--sp-1); }
+.cmp-guard-note { margin: var(--sp-3) 0 0; padding-top: var(--sp-3); border-top: 1px solid var(--border); max-width: 80ch; }
+
+@media (max-width: 900px) {
+  .cmp-body, .cmp-guard { grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+}
+@media (max-width: 560px) {
+  .cmp-pickers {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "from" "fmeta" "to" "tmeta" "swap";
+    row-gap: var(--sp-2);
+  }
+  .cmp-swap { justify-self: start; }
+  .cmp-figs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cmp-fig-change { grid-column: 1 / -1; padding-left: 0; border-left: 0; padding-top: var(--sp-3); border-top: 1px solid var(--border); }
+}

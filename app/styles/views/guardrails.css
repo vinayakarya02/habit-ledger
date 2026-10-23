@@ -1,0 +1,125 @@
+/* guardrails view: layout specifics only; shared components live in components.css. */
+
+/* Intro: safety callout and summary */
+.gr-intro { display: grid; gap: var(--sp-4); }
+.gr-intro .callout-title { font-size: var(--fs-md); }
+.gr-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Groups */
+.gr-group-head { margin: var(--sp-8) 0 var(--sp-3); }
+.gr-group-head .section-title { margin: 0; }
+.gr-group-sub { color: var(--text-3); font-size: var(--fs-sm); margin: 4px 0 0; max-width: 72ch; }
+.gr-group > .empty { background: var(--surface); border: 1px dashed var(--border-strong); border-radius: var(--radius); padding: var(--sp-6) var(--sp-4); }
+.gr-group > .empty .empty-body { max-width: 60ch; margin: 0 auto var(--sp-3); }
+.gr-group > .empty .empty-body:last-child { margin-bottom: 0; }
+.gr-list { display: grid; gap: var(--sp-4); }
+
+/* Card */
+.gr-status { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
+.gr-status-note { font-size: var(--fs-xs); color: var(--text-3); }
+.gr-card-grid { display: grid; gap: var(--sp-5); grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 900px) { .gr-card-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); } }
+.gr-card-foot { margin-top: var(--sp-5); padding-top: var(--sp-4); border-top: 1px solid var(--border); }
+.gr-status[tabindex] { border-radius: var(--radius-sm); }
+
+/* Remove: inline two-step confirmation (native details) */
+.gr-remove > summary { list-style: none; }
+.gr-remove > summary::-webkit-details-marker { display: none; }
+.gr-remove-open, .gr-remove[open] .gr-remove-closed { display: none; }
+.gr-remove[open] .gr-remove-open { display: inline; }
+.gr-remove[open] > summary { color: var(--text); border-color: var(--border-strong); }
+.gr-remove[open] { flex: 1 1 100%; }
+.gr-remove-confirm { margin-top: var(--sp-3); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; padding: var(--sp-3) var(--sp-4); border: 1px solid color-mix(in srgb, var(--neg) 40%, var(--border)); border-radius: var(--radius-sm); background: var(--neg-soft); }
+.gr-remove-confirm p { margin: 0; font-size: var(--fs-sm); color: var(--text); min-width: 0; flex: 1 1 220px; }
+/* Where details content is styleable, keep "Keep rule" in the button row and give the confirmation its own row. */
+@supports selector(::details-content) {
+  .gr-remove[open] { display: contents; }
+  .gr-remove[open]::details-content { flex: 1 1 100%; }
+  .gr-remove[open] .gr-remove-confirm { margin-top: 0; }
+}
+
+.gr-facts { margin: 0; display: grid; gap: var(--sp-4); }
+.gr-fact dt { font-size: var(--fs-xs); font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+.gr-fact dd { margin: 0; font-size: var(--fs-sm); color: var(--text-2); min-width: 0; }
+.gr-fact dd p { margin: 0; }
+.gr-fact dd p + p { margin-top: 4px; }
+
+.gr-behaviour { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
+.gr-behaviour-name { font-weight: 600; color: var(--text); font-size: var(--fs-md); }
+.gr-why { display: grid; gap: 4px; }
+.gr-why-line { color: var(--text-2); }
+.gr-why-line .def { vertical-align: -3px; margin-left: 2px; }
+.gr-optional { color: var(--text-3); font-size: var(--fs-xs); }
+.gr-optional.is-limit { color: var(--text-2); }
+.gr-overlap { margin: 0; color: var(--text-3); font-size: var(--fs-xs); }
+.gr-why-actions { font-size: var(--fs-sm); }
+
+.gr-rule { color: var(--text); font-size: var(--fs-md); font-weight: 600; line-height: 1.45; border-left: 3px solid var(--accent); padding-left: var(--sp-3); }
+.gr-setting { color: var(--text-3); font-size: var(--fs-xs); }
+
+.gr-nubra { display: grid; gap: 6px; }
+.gr-nubra-text { margin: 0; }
+.gr-snippet { margin: var(--sp-2) 0 0; display: grid; gap: 6px; }
+.gr-snippet figcaption { font-size: var(--fs-xs); color: var(--text-3); font-weight: 600; }
+.gr-snippet pre { max-height: 240px; overflow: auto; }
+
+/* Compliance block */
+.gr-compliance { background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--sp-4); min-width: 0; }
+.gr-comp-head { display: flex; align-items: center; gap: 6px; }
+.gr-comp-head h4 { font-size: var(--fs-sm); font-weight: 650; }
+.gr-comp-note { font-size: var(--fs-xs); color: var(--text-3); margin: 6px 0 0; }
+.gr-periods { list-style: none; margin: var(--sp-3) 0 0; padding: 0; display: grid; }
+.gr-period { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px var(--sp-3); align-items: center; padding: var(--sp-3) 0; border-top: 1px solid var(--border); }
+.gr-period:first-child { border-top: 0; padding-top: 0; }
+.gr-period:last-child { padding-bottom: 0; }
+.gr-period-label { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: var(--fs-sm); font-weight: 600; color: var(--text); min-width: 0; }
+/* Rule phase (what-if vs after the current settings were saved): a wrapping text line, not a chip. */
+.gr-phase { flex: 1 1 100%; font-size: var(--fs-xs); font-weight: 500; line-height: 1.35; color: var(--text-3); }
+.gr-phase-after { color: var(--text-2); font-weight: 600; }
+.gr-period-value { display: flex; align-items: center; gap: var(--sp-2); justify-self: end; }
+.gr-period-value .meter { width: 56px; }
+.gr-pct { font-size: var(--fs-md); font-weight: 650; color: var(--text); }
+.gr-period.is-current .gr-pct { font-size: var(--fs-lg); }
+.gr-period-sub { grid-column: 1 / -1; font-size: var(--fs-xs); color: var(--text-3); }
+.gr-compliance-flat { background: transparent; border: 0; padding: 0; }
+.gr-compliance-flat .gr-periods { margin-top: 0; }
+
+/* Editor dialog */
+.gr-dialog { display: flex; flex-direction: column; }
+.gr-dialog-head { padding: var(--sp-5) var(--sp-5) var(--sp-4); border-bottom: 1px solid var(--border); }
+.gr-dialog-head { display: grid; gap: var(--sp-2); }
+.gr-dialog-head h2 { font-size: var(--fs-xl); }
+.gr-dialog-kind { display: block; font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .07em; color: var(--text-3); font-weight: 600; margin-bottom: 6px; }
+.gr-dialog-body { padding: var(--sp-5); display: grid; gap: var(--sp-5); }
+.gr-dialog-section { display: grid; gap: var(--sp-2); min-width: 0; }
+.gr-dialog-section + .gr-dialog-section { padding-top: var(--sp-5); border-top: 1px solid var(--border); }
+.gr-dialog-section-head { display: flex; align-items: center; gap: 6px; }
+.gr-dialog-section-head h3 { font-size: var(--fs-xs); font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .04em; }
+.gr-dialog-section .gr-why { font-size: var(--fs-sm); }
+.gr-fields { display: grid; gap: var(--sp-3); }
+.gr-field { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.gr-fields select { width: 100%; max-width: 14rem; }
+.gr-preview { gap: var(--sp-3); }
+.gr-problems { margin: 0; padding-left: 1.1em; }
+.gr-muted-line { margin: 0; font-size: var(--fs-sm); color: var(--text-3); }
+.gr-dialog-note { margin: 0; font-size: var(--fs-xs); color: var(--text-3); }
+.gr-dialog-foot { position: sticky; bottom: 0; display: flex; justify-content: flex-end; gap: var(--sp-2); flex-wrap: wrap; padding: var(--sp-4) var(--sp-5); border-top: 1px solid var(--border); background: var(--surface); border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+
+@media (max-width: 640px) {
+  .gr-group-head { margin-top: var(--sp-6); }
+  .gr-summary { gap: var(--sp-2); }
+  .gr-summary .stat { padding: var(--sp-3); }
+  .gr-summary .stat-label { letter-spacing: .02em; }
+  .gr-summary .stat-value { font-size: var(--fs-xl); }
+  .gr-summary .stat-sub { display: none; }
+  /* Definition popovers: components.css turns them into a bottom sheet at this width. */
+  .gr-dialog-head, .gr-dialog-body { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+  .gr-dialog-foot { padding: var(--sp-3) var(--sp-4); }
+  .gr-dialog-foot .btn { flex: 1 1 auto; }
+}
+
+/* Very narrow phones: three summary tiles are about 100px wide, so uppercase labels cannot fit. */
+@media (max-width: 400px) {
+  .gr-summary .stat { padding: var(--sp-3) 6px; }
+  .gr-summary .stat-label { text-transform: none; letter-spacing: 0; }
+}

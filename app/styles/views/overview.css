@@ -1,0 +1,84 @@
+/* Overview (monthly review): layout specifics only; shared components live in components.css. */
+
+/* ---------- layout ----------
+   DOM order (next step, main review, side panels) is the single-column order.
+   Above the .grid-main-side breakpoint the next step and side panels share the right-hand column;
+   the main column spans both rows, so the side column stacks without gaps. */
+.ov-layout { gap: var(--sp-4); }
+.ov-main, .ov-side { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
+.ov-slot { min-width: 0; }
+@media (min-width: 1101px) {
+  .ov-layout { grid-template-rows: auto 1fr; gap: var(--sp-5); }
+  .ov-main, .ov-side { gap: var(--sp-5); }
+  .ov-o-next { grid-column: 2; grid-row: 1; }
+  .ov-main { grid-column: 1; grid-row: 1 / span 2; }
+  .ov-side { grid-column: 2; grid-row: 2; }
+}
+
+/* ---------- key statistics ---------- */
+.ov-stats-wrap { container-type: inline-size; }
+.ov-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-3); }
+.ov-stats > .stat:first-child { grid-column: span 2; }
+.ov-stats > .stat:first-child .stat-value { font-size: var(--fs-2xl); }
+.ov-stats .stat-sub .link { text-align: left; }
+/* Definition popovers flip left on their own (main.js) and become a bottom sheet on phones (components.css). */
+
+@container (max-width: 620px) {
+  .ov-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- habits that passed the evidence bar ---------- */
+.ov-headline { font-size: var(--fs-lg); font-weight: 600; color: var(--text); margin: 0 0 var(--sp-2); max-width: 60ch; }
+.ov-headline-note { margin: 0 0 var(--sp-3); font-size: var(--fs-sm); color: var(--text-2); max-width: 70ch; }
+/* The qualifier sits right after the headline figure, in quieter type. */
+.ov-qual { font-size: var(--fs-sm); font-weight: 400; color: var(--text-2); }
+.ov-round-note { margin: var(--sp-3) 0 0; font-size: var(--fs-xs); color: var(--text-3); }
+.ov-habits { list-style: none; margin: 0; padding: 0; }
+.ov-habit {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  grid-template-areas: "rank name cost" ". meta cost" ". actions actions";
+  gap: var(--sp-2) var(--sp-4);
+  align-items: start;
+  padding: var(--sp-4) 0;
+  border-top: 1px solid var(--border);
+}
+.ov-habit:last-child { padding-bottom: var(--sp-2); }
+.ov-rank { grid-area: rank; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: var(--fs-sm); font-weight: 650; font-variant-numeric: tabular-nums; color: var(--text-2); border: 1px solid var(--border-strong); }
+.ov-rank.is-first { background: var(--accent-soft); color: var(--accent-strong); border-color: transparent; }
+.ov-habit-name { grid-area: name; font-size: var(--fs-md); align-self: center; }
+.ov-habit-meta { grid-area: meta; display: flex; flex-direction: column; gap: var(--sp-2); min-width: 0; }
+.ov-habit-facts { margin: 0; font-size: var(--fs-sm); color: var(--text-2); }
+.ov-habit-note { margin: 0; font-size: var(--fs-xs); color: var(--text-3); }
+.ov-habit-actions { grid-area: actions; }
+.ov-habit-cost { grid-area: cost; display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 2px; }
+.ov-cost-label { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xs); color: var(--text-3); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.ov-cost-value { font-size: var(--fs-lg); font-weight: 650; letter-spacing: -.01em; }
+.ov-cost-basis { font-size: var(--fs-xs); color: var(--text-3); max-width: 24ch; }
+.ov-habit-cost .def-body { text-align: left; }
+
+@media (max-width: 640px) {
+  .ov-habit { grid-template-columns: 28px minmax(0, 1fr); grid-template-areas: "rank name" ". cost" ". meta" ". actions"; }
+  .ov-habit-cost { flex-direction: row; flex-wrap: wrap; align-items: baseline; text-align: left; gap: 4px var(--sp-2); }
+  .ov-cost-basis { max-width: none; }
+}
+
+.ov-foot { margin: var(--sp-4) 0 0; padding-top: var(--sp-3); border-top: 1px solid var(--border); font-size: var(--fs-sm); color: var(--text-2); }
+
+/* ---------- shared row lists (near misses, change) ---------- */
+.ov-list { list-style: none; margin: 0; padding: 0; }
+.ov-list > li + li { margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px solid var(--border); }
+.ov-row-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--sp-2); flex-wrap: wrap; font-size: var(--fs-sm); }
+.ov-why { margin: 4px 0 0; font-size: var(--fs-sm); color: var(--text-2); }
+.ov-change-rates { margin: 6px 0 0; font-size: var(--fs-md); font-weight: 650; }
+.ov-change-counts { margin: 2px 0 0; font-size: var(--fs-xs); color: var(--text-3); }
+.ov-arrow { display: inline-block; margin: 0 6px; color: var(--text-3); font-weight: 400; }
+
+/* ---------- side column ---------- */
+.ov-next-title { font-size: var(--fs-md); margin: 0 0 4px; }
+.ov-next-body { font-size: var(--fs-sm); color: var(--text-2); margin: 0 0 var(--sp-4); }
+.ov-src { margin: 0; font-size: var(--fs-sm); }
+.ov-src strong { display: block; color: var(--text); }
+.ov-src-detail { display: block; color: var(--text-3); font-size: var(--fs-xs); margin-top: 2px; }
+.ov-quality-items { margin: var(--sp-3) 0 0; padding-left: 1.1em; font-size: var(--fs-sm); color: var(--text-2); display: grid; gap: 4px; }
+.ov-quality-actions { margin-top: var(--sp-3); }

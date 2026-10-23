@@ -1,0 +1,83 @@
+/* method view: layout specifics only; shared components live in components.css. */
+
+/* Page layout: sections, with an in-page contents list (a sticky right rail on wide screens). */
+.method-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-5); align-items: start; }
+.method-sections { display: grid; gap: var(--sp-5); min-width: 0; }
+.method-sections > .panel { scroll-margin-top: calc(var(--header-h) + var(--sp-4)); }
+@media (min-width: 1100px) {
+  .method-layout { grid-template-columns: minmax(0, 1fr) 212px; }
+  .method-sections { grid-column: 1; grid-row: 1; }
+  .method-toc { grid-column: 2; grid-row: 1; position: sticky; top: calc(var(--header-h) + var(--sp-4)); max-height: calc(100vh - var(--header-h) - var(--sp-8)); overflow-y: auto; }
+}
+
+/* Contents list */
+.method-toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--sp-4); min-width: 0; }
+.method-toc .eyebrow { margin-bottom: var(--sp-2); }
+.method-toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: var(--fs-sm); }
+.method-toc a { display: flex; gap: var(--sp-2); align-items: baseline; padding: 5px var(--sp-2); border-radius: var(--radius-sm); color: var(--text-2); text-decoration: none; }
+.method-toc a:hover { background: var(--surface-2); color: var(--text); }
+.method-toc-num { color: var(--text-3); font-size: var(--fs-xs); flex: none; }
+@media (min-width: 640px) and (max-width: 1099px) {
+  .method-toc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--sp-4); }
+}
+
+/* Section headings and reading measure */
+.method .panel-title { font-size: var(--fs-lg); }
+.method-num { color: var(--text-3); font-weight: 600; margin-right: var(--sp-3); }
+.method-prose { max-width: 72ch; }
+.method-h3 { font-size: var(--fs-md); margin: var(--sp-6) 0 var(--sp-3); }
+.panel-body > .method-h3:first-child,
+.method-two .method-h3:first-child,
+.method-card .method-h3 { margin-top: 0; }
+.method-list, .method-steps { margin: 0 0 var(--sp-4); padding-left: 1.25em; }
+.method-list li + li, .method-steps li + li { margin-top: var(--sp-2); }
+.method-steps li::marker { color: var(--text-3); font-variant-numeric: tabular-nums; }
+.method-cell-list { margin: 0; padding-left: 1.1em; }
+.method-cell-list li + li { margin-top: var(--sp-1); }
+.method-after { margin: var(--sp-4) 0 0; }
+.method .panel-body > .callout,
+.method .panel-body > .table-wrap,
+.method .panel-body > .formula { margin-bottom: var(--sp-4); }
+.method .panel-body > :last-child { margin-bottom: 0; }
+
+/* Two-column lists (does / does not; established / not established) */
+.method-two { display: grid; gap: var(--sp-4) var(--sp-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); margin: var(--sp-5) 0 var(--sp-4); }
+.panel-body > .method-two:first-child { margin-top: 0; }
+.method-two .method-list { margin-bottom: 0; }
+
+/* Wide reference tables scroll inside .table-wrap on narrow screens instead of crushing their text. */
+#method-habit-table table { min-width: 760px; table-layout: fixed; }
+#method-habit-table th:nth-child(1) { width: 15%; }
+#method-habit-table th:nth-child(2) { width: 20%; }
+#method-habit-table th:nth-child(3) { width: 10%; }
+#method-habit-table th:nth-child(4) { width: 17%; }
+#method-habit-table th:nth-child(5) { width: 14%; }
+#method-habit-table th:nth-child(6) { width: 24%; }
+#method-habit-table th { white-space: normal; }
+#method-edge-table table { min-width: 720px; }
+#method-edge-table td:first-child { width: 22%; }
+#method-fields-table table, #method-gate-table table, #method-baseline-table table, #method-preset-table table { min-width: 600px; }
+#method-planted-table table { min-width: 640px; }
+#method-fields-table td:first-child, #method-gate-table td:first-child { width: 24%; }
+#method-baseline-table td:first-child { width: 16%; }
+
+/* Worked examples */
+.method-worked-grid { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); align-items: start; }
+.method-worked { display: grid; gap: var(--sp-2); min-width: 0; }
+.method-worked > p { margin: 0; }
+.method-worked .formula .row { flex-wrap: nowrap; align-items: baseline; gap: var(--sp-3); }
+.method-worked .formula .row > span:first-child { flex: 1 1 auto; min-width: 0; }
+.method-worked .formula .row > span:last-child { flex: 0 1 auto; text-align: right; }
+
+/* Guardrail cards */
+.method-cards { display: grid; gap: var(--sp-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.method-card { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--sp-4); display: grid; gap: var(--sp-3); align-content: start; min-width: 0; }
+.method-card > p { margin: 0; }
+.method-card .method-h3 + p { margin-top: calc(-1 * var(--sp-2)); }
+.method-kv { grid-template-columns: minmax(90px, auto) 1fr; }
+.method-nubra { display: grid; gap: var(--sp-2); justify-items: start; padding-top: var(--sp-3); border-top: 1px solid var(--border); }
+.method-nubra p { margin: 0; color: var(--text-2); }
+.method-snippet { width: 100%; min-width: 0; font-size: var(--fs-sm); }
+.method-snippet summary { cursor: pointer; color: var(--text-2); font-weight: 600; }
+.method-snippet pre { margin-top: var(--sp-2); }
+.method-snippet p { margin-top: var(--sp-2); }

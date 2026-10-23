@@ -1,0 +1,88 @@
+/* Design tokens. Light is the default; dark applies via [data-theme="dark"] or the system preference. */
+:root {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Mono", Consolas, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-md: 0.9375rem;
+  --fs-lg: 1.0625rem;
+  --fs-xl: 1.3125rem;
+  --fs-2xl: 1.75rem;
+  --fs-num: 1.5rem;
+
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --radius-sm: 6px; --radius: 10px; --radius-lg: 14px;
+  --sidebar-w: 236px;
+  --header-h: 60px;
+  --content-max: 1180px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #f1f3f6;
+  --surface-3: #e7eaef;
+  --border: #e0e4ea;
+  --border-strong: #c9d0da;
+  --input-border: #8a93a3; /* at least 3:1 against --surface for form controls */
+  --text: #121722;
+  --text-2: #475064;
+  --text-3: #5b6477; /* at least 4.5:1 on --bg and --surface-2 */
+  --accent: #2743c9;
+  --accent-strong: #1d34a3;
+  --accent-soft: #e8ecfb;
+  --on-accent: #ffffff;
+  --pos: #0d7445;
+  --pos-soft: #e1f2e8;
+  --neg: #b8321f;
+  --neg-soft: #fbe9e6;
+  --warn: #8a5800;
+  --warn-soft: #fcf0d6;
+  --info-soft: #eaf0fb;
+  --bar-a: #9aa6bd;
+  --bar-b: #2743c9;
+  --shadow-1: 0 1px 2px rgba(16, 24, 40, .05);
+  --shadow-2: 0 10px 30px rgba(16, 24, 40, .14);
+  --scrim: rgba(12, 16, 24, .48);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b0e13;
+    --surface: #12161d;
+    --surface-2: #181d26;
+    --surface-3: #202632;
+    --border: #252c38;
+    --border-strong: #353e4d;
+    --input-border: #5f6a7d;
+    --text: #e8ebf1;
+    --text-2: #aab2c0;
+    --text-3: #838c9d;
+    --accent: #8fa3ff;
+    --accent-strong: #b3c1ff;
+    --accent-soft: #1b2347;
+    --on-accent: #0b0e13;
+    --pos: #45c58b;
+    --pos-soft: #0f2a1d;
+    --neg: #ff8170;
+    --neg-soft: #34170f;
+    --warn: #e8b552;
+    --warn-soft: #2d230f;
+    --info-soft: #161f36;
+    --bar-a: #4b5568;
+    --bar-b: #8fa3ff;
+    --shadow-1: none;
+    --shadow-2: 0 12px 36px rgba(0, 0, 0, .5);
+    --scrim: rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b0e13; --surface: #12161d; --surface-2: #181d26; --surface-3: #202632; --border: #252c38; --border-strong: #353e4d; --input-border: #5f6a7d;
+  --text: #e8ebf1; --text-2: #aab2c0; --text-3: #838c9d; --accent: #8fa3ff; --accent-strong: #b3c1ff; --accent-soft: #1b2347; --on-accent: #0b0e13;
+  --pos: #45c58b; --pos-soft: #0f2a1d; --neg: #ff8170; --neg-soft: #34170f; --warn: #e8b552; --warn-soft: #2d230f; --info-soft: #161f36;
+  --bar-a: #4b5568; --bar-b: #8fa3ff; --shadow-1: none; --shadow-2: 0 12px 36px rgba(0, 0, 0, .5); --scrim: rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}

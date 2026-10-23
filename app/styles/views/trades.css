@@ -1,0 +1,73 @@
+/* trades view: layout specifics only; shared components live in components.css. */
+
+/* Filter bar: search + dates on the first row, attribute filters + reset on the second. Wraps to
+   one or two controls per row on phones. */
+.trades-filters { display: grid; gap: var(--sp-3); padding-bottom: var(--sp-4); margin-bottom: var(--sp-4); border-bottom: 1px solid var(--border); }
+.trades-filters-row > .field { flex: 1 1 130px; }
+.trades-filters-primary > .field:first-child { flex: 3 1 240px; }
+.trades-filters-row > .btn { flex: 0 0 auto; }
+.trades-filters input, .trades-filters select { width: 100%; }
+
+/* Trade list */
+.trades-table th, .trades-table td { padding-left: var(--sp-2); padding-right: var(--sp-2); }
+.trades-table th:first-child, .trades-table td:first-child { padding-left: var(--sp-3); }
+.trades-table th:last-child, .trades-table td:last-child { padding-right: var(--sp-3); }
+.trades-table td { vertical-align: middle; }
+.trades-when { display: flex; flex-direction: column; white-space: nowrap; }
+.trades-label { display: block; min-width: 14ch; font-weight: 600; }
+.trades-sub { display: block; font-size: var(--fs-xs); color: var(--text-3); margin-top: calc(var(--sp-1) / 2); white-space: nowrap; }
+.trades-type { white-space: nowrap; color: var(--text-2); }
+/* Behaviour chips wrap inside a bounded cell, so a long overlap label never pushes Details off-screen. */
+.trades-table .chip-row { min-width: 14ch; max-width: 26ch; }
+.trades-table .chip { white-space: normal; text-align: left; line-height: 1.3; }
+.trades-pager .btn-row { flex-wrap: nowrap; }
+.trades-page-of { padding: 0 var(--sp-1); white-space: nowrap; }
+.trades-notes { margin: var(--sp-1) 0 0; padding-left: 1.1em; display: grid; gap: calc(var(--sp-1) / 2); }
+.trades-legend { margin: var(--sp-3) 0 0; font-size: var(--fs-xs); color: var(--text-3); }
+/* Unavailable but still focusable (aria-disabled), so focus is not lost when a button turns off. */
+.trades-view .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+.trades-view .btn[aria-disabled="true"]:hover { background: var(--surface); }
+
+/* Left out of the review: a collapsible panel (native details), closed by default. */
+.trades-left-out > summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--sp-1) var(--sp-3); padding: var(--sp-4) var(--sp-5); border-radius: var(--radius); }
+.trades-left-out > summary::-webkit-details-marker { display: none; }
+.trades-left-out[open] > summary { padding-bottom: 0; }
+.trades-left-out-title { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-md); font-weight: 650; color: var(--text); }
+/* Disclosure chevron: points right when closed, down when open. */
+.trades-left-out-title::before { content: ''; flex: none; width: .45em; height: .45em; border-right: 2px solid var(--text-3); border-bottom: 2px solid var(--text-3); transform: rotate(-45deg); transition: transform .15s ease; }
+.trades-left-out[open] .trades-left-out-title::before { transform: rotate(45deg); }
+.trades-left-out > summary .panel-sub { margin: 0; }
+.trades-left-out-intro { margin: 0 0 var(--sp-3); font-size: var(--fs-sm); color: var(--text-2); max-width: 78ch; }
+.trades-left-out td { vertical-align: top; }
+.trades-left-out-reason { display: block; min-width: 26ch; font-size: var(--fs-sm); color: var(--text-2); }
+@media (prefers-reduced-motion: reduce) { .trades-left-out-title::before { transition: none; } }
+
+/* Detail drawer */
+.trade-drawer-heading { min-width: 0; }
+.trade-drawer-heading .eyebrow { margin-bottom: var(--sp-1); }
+.trade-drawer-heading h2 { font-size: var(--fs-lg); overflow-wrap: anywhere; }
+.trade-when { margin: var(--sp-1) 0 0; font-size: var(--fs-sm); color: var(--text-2); white-space: normal; }
+.trade-drawer .drawer-body > * + * { margin-top: var(--sp-5); }
+.trade-section-title { font-size: var(--fs-md); margin-bottom: var(--sp-2); }
+.trade-kv dd { min-width: 0; }
+.trade-note { display: block; font-size: var(--fs-xs); color: var(--text-3); margin: calc(var(--sp-1) / 2) 0 0; }
+.trade-drawer th, .trade-drawer td { padding: var(--sp-2); }
+.trade-drawer th:first-child, .trade-drawer td:first-child { padding-left: var(--sp-3); }
+.trade-symbol { display: block; min-width: 10ch; font-weight: 600; }
+
+/* Legs: one column per leg, field names as sticky row headers so wide strategies scroll cleanly. */
+.trade-legs thead td { background: var(--surface-2); border-bottom: 1px solid var(--border); position: sticky; left: 0; z-index: 1; }
+.trade-legs tbody th { position: sticky; left: 0; z-index: 1; background: var(--surface); color: var(--text-3); font-size: var(--fs-sm); font-weight: 500; text-transform: none; letter-spacing: 0; }
+.trade-legs tbody tr:hover th { background: var(--surface); }
+.trade-legs tbody td { min-width: 12ch; }
+.trade-habits { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-3); }
+.trade-habit { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--sp-3) var(--sp-4); background: var(--surface-2); }
+.trade-habit-head { display: flex; gap: var(--sp-2); align-items: center; justify-content: space-between; flex-wrap: wrap; margin-bottom: var(--sp-2); }
+.trade-habit p { margin: 0 0 var(--sp-2); font-size: var(--fs-sm); color: var(--text-2); }
+.trade-habit .trade-note { margin-bottom: var(--sp-3); }
+.trade-habit .chip { white-space: normal; text-align: left; line-height: 1.3; }
+
+@media (max-width: 640px) {
+  .trade-kv { grid-template-columns: minmax(96px, auto) 1fr; }
+  .trade-habit { padding: var(--sp-3); }
+}
