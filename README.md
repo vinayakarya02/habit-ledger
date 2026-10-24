@@ -89,3 +89,4 @@ Associations, not causes. Small samples. Fixed, reasoned thresholds that have no
 | [`04_one_pager.md`](04_one_pager.md) | The 300–700-word one-pager |
 | [`05_evaluation.md`](05_evaluation.md) | Evaluation cases, actual results, limits |
 | [`06_prompt_log.md`](06_prompt_log.md) | Every prompt I sent, verbatim and in order |
+| [`prompt_log_summary.md`](prompt_log_summary.md) | Shortened version of the prompt log, as used in the submission PDF |
